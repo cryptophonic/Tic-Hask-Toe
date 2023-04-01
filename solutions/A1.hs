@@ -32,36 +32,55 @@ _SEP_ = ['_', '|', '_']
 -- *** Assignment 1-2 *** --
 
 -- Q#06
-data Square
+data Square = X | O | Neither deriving (Show, Eq)
 
 
 -- Q#07
-data GameState
+data GameState = XWon | OWon | Tie | InProgress deriving (Show, Eq)
 
 
 -- Q#08
 
-
-
-
+type Player = Square
+type Row = [Square]
+type Line = [Square]
+type Board = [Row]
+type Move = (Int, Int)
 
 
 -- Q#09
 
-getFirstPlayer = undefined
+getFirstPlayer :: Bool -> Player
+getFirstPlayer flip = if flip
+                      then X
+                      else O
 
-
-getFirstPlayer_ = undefined
+getFirstPlayer_ :: Bool -> Player
+getFirstPlayer_ flip
+    | True = X
+    | False = O
 
 -- Q#10
 
-showGameState gs = undefined
+showGameState :: GameState -> String
+showGameState gs = case gs of
+                   XWon -> "X Winner"
+                   OWon -> "O Winner"
+                   Tie -> "Tie"
+                   InProgress -> "In Progress"
 
 -- Q#11
 
-switchPlayer = undefined
+switchPlayer :: Player -> Player
+switchPlayer X = O
+switchPlayer O = X
+switchPlayer Neither = Neither
 
 
 -- Q#12
 
-showSquare = undefined
+showSquare :: Square -> String
+showSquare sq = case sq of
+                X -> "X"
+                O -> "O"
+                Neither -> "_"
