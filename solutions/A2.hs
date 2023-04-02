@@ -9,40 +9,50 @@ import Data.List (intercalate)
 
 -- Q#01
 
-promptPlayer = undefined
+promptPlayer :: Player -> String
+promptPlayer Neither = error "Invalid player"
+promptPlayer p = concat ["Player ", showSquare p, "'s turn: enter a row and column position (ex. A1)"]
 
 -- Q#02
 
-_RANGE_ = undefined
+_RANGE_ = [0 .. _SIZE_-1]
 
 -- Q#03
 
-isDigit = undefined
+isDigit :: Char -> Bool
+isDigit d = elem d ['0'..'9']
 
-
-readDigit = undefined
+readDigit :: Char -> Int
+readDigit d = if isDigit d
+              then read [d]
+              else -1
 
 -- Q#04
 
-_EMPTY_ROW_ = undefined
+_EMPTY_ROW_ = replicate 3 Neither
 
-
-_EMPTY_BOARD_ = undefined
+_EMPTY_BOARD_ = replicate 3 _EMPTY_ROW_
 
 -- Q#05
 
-isTied = undefined
+isTied :: [[Square]] -> Bool
+isTied board = if elem Neither (concat board)
+               then False
+               else True
 
-
-_TIED_BOARD_ = undefined
+_TIED_BOARD_ = [
+    [X, O, O], [O, X, X], [O, X, O] 
+  ]
 
 -- Q#06
 
-indexRowStrings = undefined
+indexRowStrings :: [String] -> [(Char, String)]
+indexRowStrings list = zip ['A' ..] list
 
 -- Q#07
 
-formatLine = undefined
+formatLine :: [String] -> String
+formatLine list = _SEP_ ++ intercalate _SEP_ list ++ _SEP_
 
 -- *** Assignment 2-2 *** --
 
