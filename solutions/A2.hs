@@ -58,12 +58,23 @@ formatLine list = _SEP_ ++ intercalate _SEP_ list ++ _SEP_
 
 -- Q#08
 
-isMoveInBounds = undefined
+isMoveInBounds :: Move -> Bool
+isMoveInBounds (row, col) = and [row >= 0, row < _SIZE_, col >= 0, col < _SIZE_]
 
 -- Q#09
 
-stringToMove = undefined
+stringToMove :: String -> Move
+stringToMove [row, col] = (convertRowIndex row, readDigit col)
+stringToMove _ = _INVALID_MOVE_
 
 -- Q#10
 
-replaceSquareInRow = undefined
+replaceSquareInRow :: Player -> Int -> Row -> Row
+replaceSquareInRow player index row
+    | or [ index < 0, index >= _SIZE_ ] = row
+    | null row = []
+    | otherwise = let (pre, _ : post) = splitAt index row
+        in concat [ pre, [player], post ]
+
+rsO = replaceSquareInRow O
+rsX = replaceSquareInRow X
