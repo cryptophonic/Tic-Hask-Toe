@@ -38,20 +38,38 @@ isColEmpty (_:xs) col = isColEmpty xs (col - 1)
 -- Q#05
 
 dropFirstCol :: Board -> Board
-dropFirstCol = undefined
+dropFirstCol [] = []
+dropFirstCol (x:xs) = tail x : dropFirstCol xs
 
 dropLastCol :: Board -> Board
-dropLastCol = undefined
+dropLastCol [] = []
+dropLastCol (x:xs) = init x : dropLastCol xs
 
 -- Q#06
 
-getDiag1 = undefined
+getDiag1 :: Board -> Row
+getDiag1 board = go 0 board
+  where
+    go :: Int -> Board -> Row
+    go _ [] = []
+    go n (x:xs) = x !! n : go (n + 1) xs
 
 
-getDiag2 = undefined
+getDiag2 :: Board -> Row
+getDiag2 board = go 2 board
+  where
+    go :: Int -> Board -> Row
+    go _ [] = []
+    go n (x:xs) = x !! n : go (n - 1) xs
 
 
-getAllLines = undefined
+getAllLines :: Board -> [Row]
+getAllLines board = board ++ (transpose board) ++ [ getDiag1 board, getDiag2 board ]
+
+-- Create new test board because _TIED_BOARD_ is a transpose of itself, not good for testing
+_TEST_BOARD_ = [
+    [O, X, X], [X, X, O], [O, O, X]
+  ]
 
 -- *** Assignment 3-2 ***
 

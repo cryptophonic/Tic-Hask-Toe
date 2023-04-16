@@ -24,11 +24,11 @@ import A3 hiding (
 
 -- Q#03
 
-dropFirstCol = undefined
+--dropFirstCol = undefined
 
 -- Q#04
 
-dropLastCol = undefined
+--dropLastCol = undefined
 
 --Q#05
 
