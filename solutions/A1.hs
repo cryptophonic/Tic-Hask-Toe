@@ -57,8 +57,8 @@ getFirstPlayer flip = if flip
 
 getFirstPlayer_ :: Bool -> Player
 getFirstPlayer_ flip
-    | True = X
-    | False = O
+    | flip == True = X
+    | flip == False = O
 
 -- Q#10
 
