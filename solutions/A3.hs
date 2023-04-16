@@ -3,35 +3,44 @@ module A3 where
 import A1
 import A2
 
-import Data.List (transpose)
+import Data.List (transpose, intercalate)
 
 -- *** Assignment 3-1 ***
 
 -- Q#01
 
-showInts = undefined
+showInts :: [Int] -> [String]
+showInts [] = []
+showInts (x:xs) = show x : showInts xs
 
 
-_HEADER_ = undefined
+_HEADER_ = formatLine (showInts _RANGE_)
 
 -- Q#02
 
-showSquares = undefined
-
+showSquares :: [Square] -> [String]
+showSquares [] = []
+showSquares (x:xs) =  showSquare x : showSquares xs
 
 -- Q#03
 
-formatRows = undefined
+formatRows :: [Row] -> [String]
+formatRows [] = []
+formatRows (x:xs) = formatLine (showSquares x) : formatRows xs
 
 -- Q#04
 
-isColEmpty = undefined
+isColEmpty :: Row -> Int -> Bool
+isColEmpty [] _ = False
+isColEmpty (x:_) 0 = x == Neither
+isColEmpty (_:xs) col = isColEmpty xs (col - 1)
 
 -- Q#05
 
+dropFirstCol :: Board -> Board
 dropFirstCol = undefined
 
-
+dropLastCol :: Board -> Board
 dropLastCol = undefined
 
 -- Q#06

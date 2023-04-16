@@ -16,11 +16,11 @@ import A3 hiding (
 
 -- Q#01
 
-_HEADER_ = undefined
+--_HEADER_ = undefined
 
 -- Q#02
 
-showSquares = undefined
+--showSquares = undefined
 
 -- Q#03
 
@@ -32,7 +32,7 @@ dropLastCol = undefined
 
 --Q#05
 
-formatRows = undefined
+--formatRows = undefined
 
 -- Q#06
 
