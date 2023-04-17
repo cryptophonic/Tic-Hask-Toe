@@ -75,16 +75,38 @@ _TEST_BOARD_ = [
 
 -- Q#07
 
-putSquare = undefined
+putSquare :: Player -> Board -> Move -> Board
+putSquare player board (rowIndex, colIndex) = go rowIndex board
+  where 
+    go :: Int -> [Row] -> [Row]
+    go _ [] = []
+    go 0 (row:rows) = (replaceSquareInRow player colIndex row) : rows
+    go index (row:rows) = row : (go (index-1) rows)
 
 -- Q#08
 
-prependRowIndices = undefined
+prependRowIndices :: [String] -> [String]
+prependRowIndices input = go (indexRowStrings input)
+  where
+    go :: [(Char, String)] -> [String]
+    go [] = []
+    go ((l,str):xs) = (l : str) : go xs
 
 -- Q#09
 
-isWinningLine = undefined
+isWinningLine :: Player -> Line -> Bool
+isWinningLine player line = go False line
+  where
+    go :: Bool -> Line -> Bool
+    go accum [] = accum
+    go _ (sq:sqs) = player == sq && go True sqs
 
 -- Q#10
 
-isValidMove = undefined
+isValidMove :: Board -> Move -> Bool
+isValidMove board (rowIndex, colIndex) = isMoveInBounds (rowIndex, colIndex) && go rowIndex board
+  where
+    go :: Int -> [Row] -> Bool
+    go _ [] = False
+    go 0 (row:_) = isColEmpty row colIndex
+    go rowIndex (row:rows) = go (rowIndex - 1) rows

@@ -43,7 +43,7 @@ isWinningLine_ = undefined
 
 -- Q#07
 
-isWinningLine = undefined
+--isWinningLine = undefined
 
 -- Q#08
 
@@ -58,7 +58,7 @@ playMove = undefined
 
 -- Q#10
 
-prependRowIndices = undefined
+--prependRowIndices = undefined
 
 -- Q#11
 
