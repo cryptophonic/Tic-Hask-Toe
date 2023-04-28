@@ -14,19 +14,19 @@ showInts [] = []
 showInts (x:xs) = show x : showInts xs
 
 
-_HEADER_ = formatLine (showInts _RANGE_)
+_HEADER_OLD_ = formatLine (showInts _RANGE_)
 
 -- Q#02
 
-showSquares :: [Square] -> [String]
-showSquares [] = []
-showSquares (x:xs) =  showSquare x : showSquares xs
+showSquaresOld :: [Square] -> [String]
+showSquaresOld [] = []
+showSquaresOld (x:xs) =  showSquare x : showSquaresOld xs
 
 -- Q#03
 
-formatRows :: [Row] -> [String]
-formatRows [] = []
-formatRows (x:xs) = formatLine (showSquares x) : formatRows xs
+formatRowsOld :: [Row] -> [String]
+formatRowsOld [] = []
+formatRowsOld (x:xs) = formatLine (showSquaresOld x) : formatRowsOld xs
 
 -- Q#04
 
@@ -37,13 +37,13 @@ isColEmpty (_:xs) col = isColEmpty xs (col - 1)
 
 -- Q#05
 
-dropFirstCol :: Board -> Board
-dropFirstCol [] = []
-dropFirstCol (x:xs) = tail x : dropFirstCol xs
+dropFirstColOld :: Board -> Board
+dropFirstColOld [] = []
+dropFirstColOld (x:xs) = tail x : dropFirstColOld xs
 
-dropLastCol :: Board -> Board
-dropLastCol [] = []
-dropLastCol (x:xs) = init x : dropLastCol xs
+dropLastColOld :: Board -> Board
+dropLastColOld [] = []
+dropLastColOld (x:xs) = init x : dropLastColOld xs
 
 -- Q#06
 
@@ -82,15 +82,26 @@ putSquare player board (rowIndex, colIndex) = go rowIndex board
     go _ [] = []
     go 0 (row:rows) = (replaceSquareInRow player colIndex row) : rows
     go index (row:rows) = row : (go (index-1) rows)
+    
+-- alternate putSquare
+{-
+putSquare p (r : rs) (0, j) = (replaceSquareInRow p j r) : rs
+putSquare p b@(r : rs) (i, j) =
+  | i > 0 = r : putSquare p rs (i-1, j)
+  | otherwise = b
+putSquare _ [] _ = []
+-}
 
 -- Q#08
 
+{-
 prependRowIndices :: [String] -> [String]
 prependRowIndices input = go (indexRowStrings input)
   where
     go :: [(Char, String)] -> [String]
     go [] = []
     go ((l,str):xs) = (l : str) : go xs
+-}
 
 -- Q#09
 
