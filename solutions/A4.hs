@@ -16,7 +16,7 @@ import A3 hiding (
 
 -- Q#01
 
-_HEADER_ = formatLine (map show _RANGE_)
+_HEADER_ = ' ' : formatLine (map show _RANGE_)
 
 -- Q#02
 
@@ -91,4 +91,4 @@ prependRowIndices input = zipWith (:) ['A' ..] input
 -- Q#11
 
 formatBoard :: Board -> String
-formatBoard = undefined
+formatBoard board = unlines . (_HEADER_:) . prependRowIndices . formatRows $ board

@@ -14,7 +14,7 @@ showInts [] = []
 showInts (x:xs) = show x : showInts xs
 
 
-_HEADER_OLD_ = formatLine (showInts _RANGE_)
+_HEADER_OLD_ = ' ' : formatLine (showInts _RANGE_)
 
 -- Q#02
 
