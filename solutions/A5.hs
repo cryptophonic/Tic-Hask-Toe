@@ -61,16 +61,43 @@ play board player = when _DISPLAY_LOGO_ printLogo
 
 -- Q#07
 
-printLogoDo = undefined
+printLogoDo :: IO ()
+printLogoDo = do
+    logo <- readFile _LOGO_PATH_
+    putStrLn logo
 
 -- Q#08
 
-firstPlayerDo = undefined
+firstPlayerDo :: IO Player
+firstPlayerDo = do
+    fp <- _RANDOM_BOOL_ 
+    return . getFirstPlayer $ fp
 
 -- Q#09
 
-getMoveDo = undefined
+getMoveDo :: Board -> IO Move
+getMoveDo board = do
+    input <- getLine
+    let move = stringToMove input
+        valid = isValidMove board move
+    if valid 
+        then return move
+        else do
+            putStrLn "Invalid move! Try again"
+            getMoveDo board
 
 -- Q#10
 
-playDo = undefined
+playDo :: Board -> Player -> IO ()
+playDo board player = do
+    when _DISPLAY_LOGO_ printLogo
+    printBoard board
+    putStrLn (promptPlayer player)
+    move <- getMove board
+    let (newState, newBoard) = playMove player board move
+    if newState == InProgress
+        then do
+            playDo newBoard (switchPlayer player)
+        else do
+            printBoard newBoard
+            putStrLn (showGameState newState)
